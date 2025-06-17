@@ -78,3 +78,11 @@ export const TelefoneCell = styled(TableCell)`
   font-family: 'Courier New', monospace;
   color: #6b7280;
 `;
+
+export const ContainerWithoutUsers = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: #666;
+`

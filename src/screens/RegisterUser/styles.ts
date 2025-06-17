@@ -11,3 +11,9 @@ export const ContainerRegisterUser = styled.div`
   align-items: center;
   flex-direction: column;
 `
+
+export const WrapperInputsInline = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+`

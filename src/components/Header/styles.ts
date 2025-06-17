@@ -15,6 +15,7 @@ export const HeaderContainer = styled.header`
 export const TextHelloUser = styled.span`
   font-size: 1.5rem;
   font-weight: 600;
+  cursor: pointer;
 `
 
 export const ContainerActions = styled.div`

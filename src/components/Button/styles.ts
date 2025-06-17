@@ -3,7 +3,7 @@ import styled from "styled-components"
 interface WrapperButtonProps {
   $width?: string
   $height?: string
-  $backgroundColor?: string
+  $backgroundcolor?: string
   $margin?: string
   color?: string
 }
@@ -11,7 +11,7 @@ interface WrapperButtonProps {
 export const WrapperButton = styled.button<WrapperButtonProps>`
   width: ${({ $width }) => $width || "100%"};
   height: ${({ $height }) => $height || "3rem"};
-  background-color: ${({ $backgroundColor }) => $backgroundColor || "#115DFC"};
+  background-color: ${({ $backgroundcolor }) => $backgroundcolor || "#115DFC"};
   color: ${({ color }) => color || "#fff"};;
   border: none;
   border-radius: 7px;

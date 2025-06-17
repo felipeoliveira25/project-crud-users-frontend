@@ -9,7 +9,7 @@ const getUsersData = async (): Promise<User[]> => {
 
 export const useGetUsers = () => {
   return useQuery<User[], Error>({
-    queryKey: ['users'],          // ✅ QueryKey OBRIGATÓRIO
+    queryKey: ['users'], 
     queryFn: getUsersData,
   })
 }
