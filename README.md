@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Documentação do Front-end - [Nome do Projeto]
 
-## Getting Started
+Bem-vindo ao front-end do projeto de criação de um CRUD de usuários, uma aplicação web desenvolvida com **Next.js**. Este projeto consome a API do back-end (construída com NestJS) para gerenciar autenticação de administradores e usuários, utilizando JWT para acesso a funcionalidades protegidas. Esta documentação guia você na configuração e execução do front-end localmente ou em produção.
 
-First, run the development server:
+## Pré-requisitos
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Antes de começar, instale os seguintes softwares:
+- **Node.js** (versão 18.x ou superior)
+- **npm** (versão 8.x ou superior) ou **yarn** (versão 1.x ou superior)
+- **Git** (para clonar o repositório)
+- O **back-end** do projeto configurado e rodando (consulte o [README do back-end](https://github.com/felipeoliveira25/project-crud-users-backend/tree/master))
+
+## Clonando o repositório
+
+1. Clone o repositório do front-end:
+   ```bash
+   git clone https://github.com/felipeoliveira25/project-crud-users-frontend.git
+   ```
+
+
+2. Acesse o diretório do projeto clonado:
+  ```bash
+   cd project-crud-users-frontend
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Instale todas as dependências usando npm ou yarn:
+- Com npm:
+  ```bash
+   npm install
+  ```
+- Com yarn
+  ```bash
+   yarn install
+  ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+4. Configuração das variáveis de ambiente
+- O front-end requer variáveis de ambiente para conectar à API do back-end. Crie um arquivo .env.local na raiz do projeto com o seguinte conteúdo:
+  ```bash
+  # .env
+    NEXT_PUBLIC_API_URL=http://localhost:3001
+  ```
 
-To learn more about Next.js, take a look at the following resources:
+- Explicação das variáveis
+  - NEXT_PUBLIC_API_URL: URL da API do back-end. Em desenvolvimento, use http://localhost:3001.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+5. Rodando o projeto
+- Inicie o servidor em modo de desenvolvimento:
+  ```bash
+  npm run dev
+  ```
+  Ou
+  ```bash
+  yarn dev
+  ```
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+6. Autenticação
+- O front-end possui uma página de login que consome o endpoint POST /auth/login do back-end. Para autenticar como administrador:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+  1. Acesse a página de login (ex.: http://localhost:3000/login).
+  2. Insira as credenciais:
+    - Username: useradmin
+    - Password: Será gerada pelo arquivo seed.ts (Consulte o back-end).
+    - Após o login, o token JWT será armazenado no localStorage e usado para acessar funcionalidades protegidas.

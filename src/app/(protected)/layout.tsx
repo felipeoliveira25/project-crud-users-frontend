@@ -10,13 +10,11 @@ export default function ProtectedLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Header nameUser="Lara Nunes" />
+    <>
+        <Header/>
         <StyledComponentsRegistry>
           {children}
         </StyledComponentsRegistry>
-      </body>
-    </html>
+    </>
   );
 }

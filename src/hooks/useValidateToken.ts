@@ -3,8 +3,7 @@ import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { toast } from "react-toastify"
 
-// Função para decodificar JWT sem bibliotecas externas
-const decodeJWT = (token) => {
+const decodeJWT = (token: string) => {
   try {
     const base64Url = token.split('.')[1]
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
@@ -21,8 +20,7 @@ const decodeJWT = (token) => {
   }
 }
 
-// Função para verificar se o token expirou
-const isTokenExpired = (token) => {
+const isTokenExpired = (token: string) => {
   if (!token) return true
   
   const decoded = decodeJWT(token)
@@ -33,7 +31,6 @@ const isTokenExpired = (token) => {
 }
 
 
-// Hook mais simples para casos básicos
 export const useValidateToken = () => {
   const router = useRouter()
 
