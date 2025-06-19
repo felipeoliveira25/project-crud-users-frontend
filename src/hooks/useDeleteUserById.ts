@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation"
 import { useMutation } from "@tanstack/react-query"
 import { toast } from "react-toastify"
 
-const deleteUserData = async (id: number): Promise<User> => {
+const deleteUserData = async (id: number) => {
   const response = await api.delete<User>(`/users/${id}`)
   return response.data
 }

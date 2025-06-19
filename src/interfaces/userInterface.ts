@@ -5,6 +5,6 @@ export interface User {
   telephone: string
   role: string
   age: number
-  salary: string
+  salary: number
 }
 

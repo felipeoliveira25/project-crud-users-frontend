@@ -16,4 +16,8 @@ export const WrapperInputsInline = styled.div`
   display: flex;
   width: 100%;
   gap: 2rem;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+  }
 `

@@ -8,8 +8,12 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useHandleLogin } from '../../hooks/useHandleLogin'
 import { loginSchema, LoginSchema } from '../../schemas/login.schema'
+import { useEffect } from 'react'
+import { useRouter } from 'next/navigation'
 
 export const LoginScreen = () => {
+
+  const router = useRouter();
 
   const {
     register,
@@ -23,27 +27,37 @@ export const LoginScreen = () => {
 
   const onSubmit = (data: LoginSchema) => {
   mutate(data)
-}
+  }
+  
+  useEffect(() => {
+    
+    const token = localStorage.getItem('authToken');
+
+    if (token) {
+      router.push('/');
+    }
+  }, [router]);
 
   return (
     <S.ContainerLoginForm>
       <Form title="Login to your Account" subtitle="Get started with us" onSubmit={handleSubmit(onSubmit)}>
-        <Input.GeneralRoot>
+        <Input.GeneralRoot className='full-width'>
           <Input.Label>Username</Input.Label>
-          <Input.RootInput {...register('username')} />
+          <Input.RootInput {...register('username')} hasError={!!errors?.username }/>
           <Input.ErrorMessage message={errors?.username?.message} />
         </Input.GeneralRoot>
 
-        <Input.GeneralRoot>
+        <Input.GeneralRoot className='full-width'>
           <Input.Label>Password</Input.Label>
           <Input.RootInput
             isPasswordInput
+            hasError={!!errors?.password }
             {...register('password')}
           />
           <Input.ErrorMessage message={errors?.password?.message} />
         </Input.GeneralRoot>
 
-        <Button type="submit">{isPending ? 'Loading' : 'Sign-In'}</Button>
+        <Button type="submit" className='full-width'>{isPending ? 'Loading' : 'Sign-In'}</Button>
       </Form>
     </S.ContainerLoginForm>
   )

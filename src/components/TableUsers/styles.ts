@@ -6,6 +6,7 @@ export const TableContainer = styled.div`
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   background: white;
+  
 `;
 
 export const Table = styled.table`
@@ -35,6 +36,7 @@ export const TableBody = styled.tbody`
 
 export const TableRow = styled.tr`
   transition: all 0.2s ease;
+  cursor: pointer;
   
   &:nth-child(even) {
     background-color: #f8fafc;

@@ -21,11 +21,12 @@ export const Icon = ({children, onClick}: IconProps) => {
 
 interface GeneralRootProps {
   children: ReactNode
+  className?: string
 }
 
-export const GeneralRoot = ({children}: GeneralRootProps) => {
+export const GeneralRoot = ({children, className}: GeneralRootProps) => {
   return (
-    <S.GeneralRootContainer>
+    <S.GeneralRootContainer className={className}>
       {children}
     </S.GeneralRootContainer>
   )
@@ -34,19 +35,46 @@ export const GeneralRoot = ({children}: GeneralRootProps) => {
 interface RootInputProps extends InputHTMLAttributes<HTMLInputElement> {
   isPasswordInput?: boolean
   children?: ReactNode
+  hasError?: boolean
+  isNumericOnly?: boolean; 
+  allowDecimal?: boolean;
 }
 
-export const RootInput = ({ children ,isPasswordInput, ...props }: RootInputProps) => {
+export const RootInput = ({ children ,isPasswordInput, hasError, isNumericOnly = false,
+  allowDecimal = false, ...props }: RootInputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   const toggleVisibility = () => setShowPassword((prev) => !prev)
 
   const inputType = isPasswordInput ? (showPassword ? 'text' : 'password') : props.type || 'text'
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (!isNumericOnly) return;
+
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+    ];
+
+    const isDecimalPoint = e.key === '.' && allowDecimal;
+    const hasDecimalPoint = (e.currentTarget.value as string).includes('.');
+
+    if (
+      !allowedKeys.includes(e.key) &&
+      !/^\d$/.test(e.key) && 
+      !(isDecimalPoint && !hasDecimalPoint)
+    ) {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <S.InputFieldContainer>
+    <S.InputFieldContainer hasError={hasError}>
       {children}
-      <S.InputFieldText {...props} type={inputType} />
+      <S.InputFieldText {...props} type={inputType} onKeyDown={handleKeyDown} />
       {isPasswordInput && (
         <Icon onClick={toggleVisibility}>
           {showPassword ? <VscEyeClosed size={18} /> : <VscEye size={18} />}
@@ -83,7 +111,7 @@ interface ErrorMessageProps {
 
 export const ErrorMessage = ({message}: ErrorMessageProps) => {
   return (
-    <span>{message }</span>
+    <S.ErrorMessageText>{message }</S.ErrorMessageText>
   )
 }
 

@@ -5,7 +5,6 @@ import * as S from './styles'
 import { useRouter } from 'next/navigation'
 import { useGetUsers } from '../../hooks/useGetUsers'
 import { useValidateToken } from '../../hooks/useValidateToken'
-import { FaTrash } from "react-icons/fa";
 
 export const TableUsers = () => {
   const router = useRouter()

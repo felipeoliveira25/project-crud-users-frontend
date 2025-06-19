@@ -1,42 +1,33 @@
-'use client'
-import { Button } from '../../components/Button'
-import { Form } from '../../components/Form'
-import * as S from './styles'
-import * as Input from '@/components/Input'
-import { EditUserProps } from './types'
-import { useRouter } from 'next/navigation'
-import { useValidateToken } from '../../hooks/useValidateToken'
-import { useForm } from 'react-hook-form'
-import { userSchema, UserSchema } from '../../schemas/user.schema'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { useGetUserById } from '../../hooks/useGetUserById'
-import { useEffect } from 'react'
-import { useHandleUpdateUser } from '../../hooks/useHandleEditUser'
-import { toast } from 'react-toastify'
-import { useDeleteUserById } from '../../hooks/useDeleteUserById'
-export const EditUserScreen = ({ id }: EditUserProps) => {
-  useValidateToken()
-  const router = useRouter()
-  
-  const backToHome = () => {
-      router.push('/')
-  }
+'use client';
+import { Button } from '../../components/Button';
+import { Form } from '../../components/Form';
+import * as S from './styles';
+import * as Input from '@/components/Input';
+import { useValidateToken } from '../../hooks/useValidateToken';
+import { useForm } from 'react-hook-form';
+import { userSchema, UserSchema } from '../../schemas/user.schema';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useGetUserById } from '../../hooks/useGetUserById';
+import { useEffect } from 'react';
+import { useHandleUpdateUser } from '../../hooks/useHandleEditUser';
+import { toast } from 'react-toastify';
+import { useDeleteUserById } from '../../hooks/useDeleteUserById';
+import { BackButton } from '../../components/BackButton';
+import { useFormActionUser } from '../../hooks/useFormActionUser';
 
-  const {
-    register,
-    handleSubmit,
-    formState: { isDirty },
-    reset,
-  } = useForm<UserSchema>({
+export const EditUserScreen = ({ id }: { id: number }) => {
+  useValidateToken();
+
+  const form = useForm<UserSchema>({
     resolver: zodResolver(userSchema),
   });
+  const { register, handleSubmit, formState: { isDirty }, reset } = form;
 
+  const { fieldsToRender, errors } = useFormActionUser(form);
   const { data: userData } = useGetUserById(id);
+  const { mutate: mutateDelete } = useDeleteUserById(id);
+  const { mutate, isPending } = useHandleUpdateUser(id);
 
-  const {mutate: mutateDelete} = useDeleteUserById(id)
-
-  const { mutate, isPending } = useHandleUpdateUser(id)
-  
   const onSubmit = (data: UserSchema) => {
     if (!isDirty) {
       toast.info('Nenhuma alteração foi feita.', {
@@ -45,62 +36,54 @@ export const EditUserScreen = ({ id }: EditUserProps) => {
       });
       return;
     }
-    console.log('Dados enviados para o PUT:', data); // Debug
     mutate(data);
   };
 
-  const handleDeleteUser = (id: number) => {
-    mutateDelete(id)
-  }
+  const handleDeleteUser = () => {
+    mutateDelete();
+  };
 
   useEffect(() => {
     if (userData) {
-      reset(userData); 
+      reset(userData);
     }
   }, [userData, reset]);
+
   return (
     <S.ContainerEditUser>
-      <Form title='Edit User' onSubmit={handleSubmit(onSubmit)}>
-          <Input.GeneralRoot>
-              <Input.Label>Name</Input.Label>
-              <Input.RootInput {...register('name')}/>
+      <BackButton />
+      <Form title="Editar Usuário" onSubmit={handleSubmit(onSubmit)}>
+        {fieldsToRender.map((field) => (
+          <Input.GeneralRoot key={field.name}>
+            <Input.Label htmlFor={field.name}>{field.label}</Input.Label>
+            <Input.RootInput
+              id={field.name}
+              type={field.type}
+              isNumericOnly={field.isNumericOnly}
+              allowDecimal={field.allowDecimal}
+              hasError={!!errors[field.name]}
+              aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
+              {...register(field.name)}
+            />
+            <Input.ErrorMessage
+              message={errors[field.name]?.message}
+            />
           </Input.GeneralRoot>
-            
-          <Input.GeneralRoot>
-              <Input.Label>E-mail</Input.Label>
-              <Input.RootInput {...register('email')}/>
-          </Input.GeneralRoot>
-        
-          <Input.GeneralRoot>
-              <Input.Label>Telephone</Input.Label>
-              <Input.RootInput {...register('telephone')}/>
-          </Input.GeneralRoot>
-          
-          <Input.GeneralRoot>
-              <Input.Label>Role</Input.Label>
-              <Input.RootInput {...register('role')}/>
-          </Input.GeneralRoot>
-          
-          <Input.GeneralRoot>
-              <Input.Label>Age</Input.Label>
-              <Input.RootInput {...register('age')}/>
-          </Input.GeneralRoot>
-          
-          <Input.GeneralRoot>
-              <Input.Label>Salary</Input.Label>
-              <Input.RootInput {...register('salary')}/>
-          </Input.GeneralRoot>
-        
-        <Button type='submit' onClick={handleSubmit(onSubmit)}>
-          {isPending ? 'Loading' : 'Save'}
+        ))}
+        <Button type="submit" disabled={isPending} className='full-width'>
+          {isPending ? 'Carregando...' : 'Salvar'}
         </Button>
-
-         <Button type='button' backgroundcolor='#f53333' color='#fff' margin='0' onClick={() => handleDeleteUser(id)}>
-          Delete user
+        <Button
+          type="button"
+          backgroundcolor="#f53333"
+          color="#fff"
+          margin="0"
+          onClick={handleDeleteUser}
+          className='full-width'
+        >
+          Excluir Usuário
         </Button>
-
-        
       </Form>
     </S.ContainerEditUser>
-  )
-}
+  );
+};

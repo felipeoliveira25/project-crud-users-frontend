@@ -1,6 +1,11 @@
 'use client'
 import styled from "styled-components";
 
+interface InputFieldContainerProps {
+  hasError?: boolean
+}
+
+
 export const GeneralRootContainer = styled.div`
     width: 100%;
     display: flex;
@@ -14,10 +19,10 @@ export const LabelInput = styled.label`
     font-weight: 600;
 `
 
-export const InputFieldContainer = styled.div`
+export const InputFieldContainer = styled.div<InputFieldContainerProps>`
     border-radius: 6px;
     outline: none;
-    border: 1px solid #e5e5e5;
+    border: ${({hasError}) => hasError ? '2px solid  #f13232' : '2px solid #e5e5e5'} ;
     height: 2.8rem;
     display: flex;
     justify-content: center;
@@ -38,4 +43,9 @@ export const InputFieldText = styled.input`
 export const WrapperIcon = styled.span`
   margin-right: 0.4rem;
   cursor: pointer;
+`
+
+export const ErrorMessageText = styled.span`
+  color:#fa4747;
+  font-size: 12px;
 `

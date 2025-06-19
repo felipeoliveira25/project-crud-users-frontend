@@ -10,3 +10,9 @@ export const ContainerEditUser = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const WrapperInputsInline = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 2rem;
+`

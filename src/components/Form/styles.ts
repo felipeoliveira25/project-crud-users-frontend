@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const FormContainer = styled.form`
     display: flex;
-    width: 45rem;
+    width: 30%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -15,6 +15,18 @@ export const FormContainer = styled.form`
       0px 7px 15px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
     border-radius: 11px;
     font-family: "Inter", sans-serif;
+
+    @media (max-width: 1230px) {
+    width: 50%;
+  }
+
+   @media (max-width: 900px) {
+    width: 70%;
+  }
+
+   @media (max-width: 650px) {
+    width: 70%;
+  }
 `
 
 export const ContainerTitle = styled.div`
@@ -41,3 +53,14 @@ export const Subtitle = styled.span`
     color: #8B8E98
 `
 
+export const ContainerFields = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  width: 100%;
+  .full-width {
+    grid-column: span 2;
+  }
+  justify-content: center;
+  align-items: center;
+`

@@ -11,7 +11,10 @@ export const Form = ({children, title, subtitle, ...props}: FormProps) => {
         <S.Title>{title}</S.Title>
         <S.Subtitle>{subtitle }</S.Subtitle>
       </S.ContainerTitle>
-      {children}
+      <S.ContainerFields>
+        {children}
+      </S.ContainerFields>
+      
         
       
     </S.FormContainer>
