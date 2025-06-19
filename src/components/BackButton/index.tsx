@@ -1,9 +1,7 @@
 import { ReactNode } from 'react';
-
 import { IoArrowBack } from 'react-icons/io5';
 import * as S from './styles';
 import { useRouter } from 'next/navigation';
-
 interface BackButtonProps {
   children?: ReactNode;
   to?: string;
@@ -16,7 +14,7 @@ export const BackButton = ({ children = 'Voltar', to }: BackButtonProps) => {
     if (to) {
       router.push(to);
     } else {
-      router.back(); // Volta à página anterior por padrão
+      router.back();
     }
   };
 

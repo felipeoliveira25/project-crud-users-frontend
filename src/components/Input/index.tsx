@@ -72,7 +72,7 @@ export const RootInput = ({ children ,isPasswordInput, hasError, isNumericOnly =
   };
 
   return (
-    <S.InputFieldContainer hasError={hasError}>
+    <S.InputFieldContainer $hasError={hasError}>
       {children}
       <S.InputFieldText {...props} type={inputType} onKeyDown={handleKeyDown} />
       {isPasswordInput && (

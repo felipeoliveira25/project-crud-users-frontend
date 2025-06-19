@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 interface InputFieldContainerProps {
-  hasError?: boolean
+  $hasError?: boolean
 }
 
 
@@ -22,7 +22,7 @@ export const LabelInput = styled.label`
 export const InputFieldContainer = styled.div<InputFieldContainerProps>`
     border-radius: 6px;
     outline: none;
-    border: ${({hasError}) => hasError ? '2px solid  #f13232' : '2px solid #e5e5e5'} ;
+    border: ${({$hasError}) => $hasError ? '2px solid  #f13232' : '2px solid #e5e5e5'} ;
     height: 2.8rem;
     display: flex;
     justify-content: center;

@@ -1,4 +1,3 @@
-// app/(public)/login/layout.tsx
 import { ReactNode } from "react"
 import StyledComponentsRegistry from "../../../lib/registry"
 

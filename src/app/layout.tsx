@@ -3,8 +3,6 @@ import { ReactQueryProvider } from "@/providers/reactQueryProvider";
 import { ToastProvider } from "@/providers/toastProvider";
 import GlobalStyles from "@/styles/globalStyles";
 
-
-
 export default function RootLayout({
   children,
 }: Readonly<{

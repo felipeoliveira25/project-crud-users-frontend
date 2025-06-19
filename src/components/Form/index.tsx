@@ -1,7 +1,5 @@
 'use client'
-
 import * as S from './styles'
-
 import { FormProps } from './types'
 
 export const Form = ({children, title, subtitle, ...props}: FormProps) => {
@@ -14,9 +12,6 @@ export const Form = ({children, title, subtitle, ...props}: FormProps) => {
       <S.ContainerFields>
         {children}
       </S.ContainerFields>
-      
-        
-      
     </S.FormContainer>
   )
 }

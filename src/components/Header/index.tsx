@@ -14,7 +14,6 @@ export const Header = () => {
       router.push('/register-user')
   } 
 
-
   const backToHome = () => {
     
     router.push('/')
@@ -23,14 +22,11 @@ export const Header = () => {
   return (
     <S.HeaderContainer>
       <S.TextHelloUser onClick={() => backToHome()}>CRUD Users</S.TextHelloUser>
-
       <S.ContainerActions>
         <S.ButtonLinkToRegisterUser $isDisabled={isAddUserPage} disabled={isAddUserPage} onClick={() => goToRegisterUserPage()}>Add User</S.ButtonLinkToRegisterUser>
-        
         <S.ProfileUser>
           <S.TextProfileUser>F</S.TextProfileUser>
         </S.ProfileUser>
-          
       </S.ContainerActions>
     </S.HeaderContainer>
   )
