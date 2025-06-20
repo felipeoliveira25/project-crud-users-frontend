@@ -36,7 +36,7 @@ Antes de começar, instale os seguintes softwares:
 
 
 4. Configuração das variáveis de ambiente
-- O front-end requer variáveis de ambiente para conectar à API do back-end. Crie um arquivo .env.local na raiz do projeto com o seguinte conteúdo:
+- O front-end requer variáveis de ambiente para conectar à API do back-end. Crie um arquivo .env na raiz do projeto com o seguinte conteúdo:
   ```bash
   # .env
     NEXT_PUBLIC_API_URL=http://localhost:3001
