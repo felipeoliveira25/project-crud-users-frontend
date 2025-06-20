@@ -1,4 +1,4 @@
-# Documentação do Front-end - [Nome do Projeto]
+# Documentação do Front-end - CRUD Users
 
 Bem-vindo ao front-end do projeto de criação de um CRUD de usuários, uma aplicação web desenvolvida com **Next.js**. Este projeto consome a API do back-end (construída com NestJS) para gerenciar autenticação de administradores e usuários, utilizando JWT para acesso a funcionalidades protegidas. Esta documentação guia você na configuração e execução do front-end localmente ou em produção.
 
